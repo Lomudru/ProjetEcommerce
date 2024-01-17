@@ -54,7 +54,7 @@ class DbManager {
     }
 
     function getById(string $tableName, $id, string $className) {
-        $req = $this->db->prepare('SELECT * FROM '.$tableName.' WHERE id = ?');
+        $req = $this->db->prepare('SELECT * FROM '.$tableName.' WHERE v_id = ?');
         $req->execute([$id]);
         $req->setFetchMode(PDO::FETCH_CLASS, $className);
         $resultat = $req->fetch();

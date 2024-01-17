@@ -30,6 +30,13 @@ ob_start();?>
 
                     <td><?php echo $vetement->prix; ?></td>
 
+                    <td>
+                        <form action="/actions/ajouterPanier.php" method="post">
+                            <input type="text" name="id" value="<?= $vetement->v_id ?>" hidden>
+                            <input type="submit" value="Ajouter au panier">
+                        </form>
+                    </td>
+
                 </tr>
             <?php endforeach; endif; ?>
     </table>
