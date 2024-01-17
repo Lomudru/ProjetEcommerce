@@ -6,7 +6,7 @@ session_start();
 require_once __DIR__ . '/db.php';
 
 // config du site
-$existing_pages = ['home', 'login', 'register', 'produit', 'categorie', 'admin', 'modifier', 'ajouter', 'panier'];
+$existing_pages = ['home', 'login', 'register', 'produit', 'categorie', 'admin', 'modifier', 'ajouter', 'panier','commande'];
 
 // les classes
 require_once __DIR__ . '/class/User.php';
