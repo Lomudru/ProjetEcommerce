@@ -10,6 +10,11 @@ $existing_pages = ['home', 'login', 'register'];
 
 // les classes
 require_once __DIR__ . '/class/User.php';
+require_once __DIR__ . '/class/DbManager.php';
+require_once __DIR__ . '/class/Vetement.php';
+
+$BDD = new DbManager($db);
+
 
 // tous les utilitaires
 require_once __DIR__ . '/utils/error.php';
