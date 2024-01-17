@@ -6,12 +6,13 @@ session_start();
 require_once __DIR__ . '/db.php';
 
 // config du site
-$existing_pages = ['home', 'login', 'register'];
+$existing_pages = ['home', 'login', 'register', 'produit', 'categorie'];
 
 // les classes
 require_once __DIR__ . '/class/User.php';
 require_once __DIR__ . '/class/DbManager.php';
 require_once __DIR__ . '/class/Vetement.php';
+require_once __DIR__ . '/class/Categorie.php';
 
 $BDD = new DbManager($db);
 

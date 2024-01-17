@@ -11,7 +11,7 @@ ob_start();?>
 
                     <div class="nav2">
                         <ul>
-                            <li><a href="">ACCUEIL</a></li>
+                            <li><a href="/?p=home">ACCUEIL</a></li>
                             <li><a href="">HOMME</a></li>
                             <li><a href="">FEMME</a></li>
                             <li><a href="">À PROPOS</a></li>
