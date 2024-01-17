@@ -14,7 +14,7 @@ class DbManager {
     function insert(string $sql, array $data) {
         $sth = $this->db->prepare($sql);
         $sth->execute($data);
-        echo $this->db->lastInsertId();
+        return $this->db->lastInsertId();
     }
 
     function insert_advanced(DbObject $dbObj) {
@@ -40,6 +40,14 @@ class DbManager {
     function select(string $sql, array $data, string $className) {
         $req = $this->db->prepare($sql);
         $req->execute($data);
+        $req->setFetchMode(PDO::FETCH_CLASS, $className);
+        $resultat = $req->fetchAll();
+        return $resultat;
+    }
+
+    function selectAll(string $sql, string $className) {
+        $req = $this->db->prepare($sql);
+        $req->execute();
         $req->setFetchMode(PDO::FETCH_CLASS, $className);
         $resultat = $req->fetchAll();
         return $resultat;
@@ -72,7 +80,7 @@ class DbManager {
     }
 
     function removeById(string $tableName, $id) {
-        $req = $this->db->prepare('DELETE FROM '.$tableName.' WHERE id=?');
+        $req = $this->db->prepare('DELETE FROM '.$tableName.' WHERE v_id=?');
         $req->execute([$id]);
     }
 
@@ -85,7 +93,7 @@ class DbManager {
         }
         $sql = substr($sql,0,-2);
         var_dump($sql);
-        $req = $this->db->prepare($sql.' WHERE id=:id');
+        $req = $this->db->prepare($sql.' WHERE v_id=:id');
         $req->execute($data);
     }
 

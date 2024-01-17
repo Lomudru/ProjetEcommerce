@@ -19,15 +19,15 @@ ob_start();?>
 
                 <tr>
 
-                <td><?php echo $vetement->nom; ?></td>
+                <td><?= $vetement->nom; ?></td>
 
-                <td><?php echo $vetement->taille; ?></td>
+                <td><?= $vetement->taille; ?></td>
 
-                <td><?php echo $vetement->couleur; ?></td>
+                <td><?= $vetement->couleur; ?></td>
 
-                <td><?php echo $vetement->matiere; ?></td>
+                <td><?= $vetement->matiere; ?></td>
 
-                <td><?php echo $vetement->prix; ?></td>
+                <td><?= $vetement->prix; ?></td>
 
                 </tr>
             <?php endforeach; endif; ?>
