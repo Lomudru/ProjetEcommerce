@@ -96,6 +96,19 @@ class DbManager {
         $req = $this->db->prepare($sql.' WHERE v_id=:id');
         $req->execute($data);
     }
+    function updateCommande(string $tableName, array $data) {
+        $sql = 'UPDATE '.$tableName.' SET date_maj = NOW(), ';
+        foreach($data as $clef => $value){
+            if ($clef != 'id'){
+                $sql = $sql.$clef.'=:'.$clef.', ';
+            }
+        }
+        
+        $sql = substr($sql,0,-2);
+        var_dump($sql);
+        $req = $this->db->prepare($sql.' WHERE commande_id=:id');
+        $req->execute($data);
+    }
 
     function update_advanced(DbObject $dbObj) {
         $tableName = strtolower(get_class($dbObj)).'s';
