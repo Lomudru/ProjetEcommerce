@@ -2,6 +2,12 @@
 
 $title = 'register';
 
+if(isset($_SESSION['user_id']))
+{
+    header("Location: /?p=home");
+    die();
+}
+
 ob_start();?>
 <div>
     <h1>PAGE REGISTER</h1>
@@ -10,7 +16,6 @@ ob_start();?>
     
     <form action="/actions/register.php" method="POST">
         <input type="email" name="email">
-        <input type="text" name="username">
         <input type="password" name="password">
         <input type="password" name="cpassword">
         <button type="submit">Register now!</button>

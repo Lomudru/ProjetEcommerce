@@ -33,17 +33,5 @@ class User {
     public function verifyPassword($mdp) {
         return (hash('sha256', $mdp) === $this->mdp); // true ou false
     }
-    
-    /*
-    public function save() {
-        global $db;
-        $query = $db->prepare('INSERT INTO users (email, mdp, role ) VALUES(?, ?, ?)');
-        $query->execute([
-            $this->email,
-            $this->mdp,
-            $this->role,
-        ]);
-        return $db->lastInsertId();
-    }
-    */
+
 }

@@ -8,12 +8,6 @@ if (!isset($_POST['email'])) {
     die();
 }
 
-if (!isset($_POST['username'])) {
-    $_SESSION['error_message'] = "Pas de username";
-    header('Location: /?p=register');
-    die();
-}
-
 if (!isset($_POST['password'])) {
     $_SESSION['error_message'] = "Pas de password";
     header('Location: /?p=register');
@@ -36,17 +30,10 @@ if ($_POST['password'] !== $_POST['cpassword']) {
     die();
 }
 
-$username_len = strlen($_POST['username']);
+$hashedmdp = hash('sha256', $_POST["password"]);
 
-if ($username_len < 3 || $username_len > 12) {
-    $_SESSION['error_message'] = "Longueur de username incorrect (doit etre entre 3 et 12)";
-    header('Location: /?p=register');
-    die();
-}
-
-$user = User::register($_POST['email'], $_POST['username'], $_POST['password']);
-$user_id = $user->save();
-
+$user_id = $BDD->insert("INSERT INTO utilisateur(email,mdp,role) VALUES(?,?,?)",
+[$_POST["email"],$hashedmdp,0]);
 // auto connect after register
 $_SESSION['user_id'] = $user_id;
 

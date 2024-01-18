@@ -2,6 +2,17 @@
 
 $title = 'admin';
 
+if(isset($_SESSION['user_id']))
+{
+    $role = $BDD->getByIdUser('utilisateur',$_SESSION['user_id'],'User');
+
+    if($role->role == 0)
+    {
+        header("Location: /?p=home");
+        die();
+    }
+}
+
 $TableauVetements = $BDD->selectAll("SELECT * FROM vetements", "Vetement");
 
 ob_start();?>

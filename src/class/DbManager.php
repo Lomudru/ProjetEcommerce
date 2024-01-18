@@ -61,6 +61,14 @@ class DbManager {
         return $resultat;
     }
 
+    function getByIdUser(string $tableName, $id, string $className) {
+        $req = $this->db->prepare('SELECT * FROM '.$tableName.' WHERE user_id = ?');
+        $req->execute([$id]);
+        $req->setFetchMode(PDO::FETCH_CLASS, $className);
+        $resultat = $req->fetch();
+        return $resultat;
+    }
+
     function getById_advanced($id, string $className) {
         $tableName = strtolower($className).'s';
         return $this->getById($tableName, $id, $className);

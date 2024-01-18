@@ -2,6 +2,17 @@
 
 $title = 'Modifier';
 
+if(isset($_SESSION['user_id']))
+{
+    $role = $BDD->getByIdUser('utilisateur',$_SESSION['user_id'],'User');
+
+    if($role->role == 0)
+    {
+        header("Location: /?p=home");
+        die();
+    }
+}
+
 if(isset($_POST["id"])){
     $vetements = $BDD->select("SELECT * FROM vetements WHERE v_id = ?", str_split($_POST["id"]), "Vetement");
 }

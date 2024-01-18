@@ -2,7 +2,10 @@
 
 $title = 'home';
 
-
+if(isset($_GET["disconnect"]) && $_GET["disconnect"] == 'true')
+{
+    unset($_SESSION["user_id"]);
+}
 
 ob_start();?>
 

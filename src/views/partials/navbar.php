@@ -18,10 +18,18 @@ ob_start();?>
                         </ul>
                     </div>
 
+                    <?php if(isset($_SESSION["user_id"]))
+                    { ?>
+                        <a href="/?p=home&disconnect=true">Vous deconnecter</a>
+                    <?php }
+                    else { ?>
+
                     <div class="nav3">
-                        <button class="btn1">Login</button>
-                        <button class="btn2">Sing up</button>
+                        <a href="/?p=login">Login</a>
+                        <a href="/?p=register">Register</a>
                     </div>
+
+                    <?php } ?>
                 </div>
             </nav>
         </header>

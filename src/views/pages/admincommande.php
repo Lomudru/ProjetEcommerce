@@ -1,6 +1,18 @@
 <?php
 
 $title = 'admincommande';
+
+if(isset($_SESSION['user_id']))
+{
+    $role = $BDD->getByIdUser('utilisateur',$_SESSION['user_id'],'User');
+
+    if($role->role == 0)
+    {
+        header("Location: /?p=home");
+        die();
+    }
+}
+
 if(isset($_POST["tri"]) && $_POST["tri"] != "ALL"){ 
     $tableauCommande = $BDD->selectAll("SELECT * FROM commande WHERE statut = '".$_POST["tri"]."'","Commande");
 }
