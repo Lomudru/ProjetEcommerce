@@ -33,7 +33,7 @@ ob_start();?>
             </table>
             <?php endforeach;
             ?>
-            <button href="/?p=commande">Commander</button>
+            <button><a href="/?p=commande">Commander</a></button>
         <?php else:?>
         <p>panier vide</p>
     <?php endif;?>
