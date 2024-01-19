@@ -6,7 +6,7 @@ ob_start();?>
             <nav>
                 <div class="navbar">
                     <div class="nav1">
-                        <p>a</p>
+                        <p>LA MARQUE</p>
                     </div>
 
                     <div class="nav2">
@@ -20,7 +20,7 @@ ob_start();?>
 
                     <?php if(isset($_SESSION["user_id"]))
                     { ?>
-                        <a href="/?p=home&disconnect=true">Vous deconnecter</a>
+                        <a href="/?p=home&disconnect=true">SE DÉCONNECTER</a>
                     <?php }
                     else { ?>
 

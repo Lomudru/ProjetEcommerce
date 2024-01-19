@@ -8,7 +8,10 @@
       font-family: 'Inter', sans-serif;
       color: white;
   }
-
+img{
+    width: 200px;
+    height: 200px;
+}
 form {
     display: flex;
     justify-content: center;

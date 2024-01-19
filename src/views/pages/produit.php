@@ -25,7 +25,7 @@ if (isset($_POST['produit'])) {
 }
 
 ob_start();?>
-<div>
+<main>
     <?php if($existing): ?>
     <table>
         <?php 
@@ -43,49 +43,57 @@ ob_start();?>
                     }
                 }
                 ?>
-                <tr>
+                <tr class="all-info">
                     <td><img src="<?= "img/id_img/".$vetement->v_id."/image.png"?>"></td>
-                    <td><?php echo $vetement->nom; ?></td>
-
-                    <td><?php echo $vetement->taille; ?></td>
-
-                    <td><?php echo $vetement->couleur; ?></td>
-
-                    <td><?php echo $vetement->matiere; ?></td>
-
-                    <td><?php echo $vetement->prix; ?></td>
-
-                    <td>
-                        <?php 
-                        if(isset($_SESSION['user_id']))
-                        { ?>
-                            <form action="/actions/ajouterPanier.php" method="post">
-                                <input type="text" name="id" value="<?= $vetement->v_id ?>" hidden>
-                                <input type="submit" value="Ajouter au panier">
-                            </form>
-                       <?php }
-                        ?>
-                    </td>
-                    <?php if(isset($_SESSION["user_id"]) && $autorizeComment): ?>
-                        <td>
-                            <form action="/actions/commenter.php" method="post">
-                                <input type="text" name="produit" value="<?= $vetement->nom ?>" hidden>
-                                <input type="text" name="id" value="<?= $vetement->v_id ?>" hidden>
-                                <select name="note" required>
-                                    <option value="">Choisissez une note</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                </select>
-                                <label for="message">Commenter : </label>
-                                <textarea name="message" cols="30" rows="10" required></textarea>
-                                <input type="submit" value="Envoyer le commentaire">
-                            </form>
-                        </td>
-                    <?php endif; ?>
+                    <div class="info1">
+                        <td>Nom : <?php echo $vetement->nom; ?></td>
+                    </div>
+                    <div class="info2">
+                        <td>Taille : <?php echo $vetement->taille; ?></td>
+                    </div>
+                    <div class="info3">
+                        <td>Couleur : <?php echo $vetement->couleur; ?></td>
+                    </div>
+                    <div class="info4">
+                        <td>Matière : <?php echo $vetement->matiere; ?></td>
+                    </div>
+                    <div class="info5">
+                        <td>Prix : <?php echo $vetement->prix; ?></td>
+                   </div>
                 </tr>
+
+                <td class="all-form">
+                    <?php 
+                    if(isset($_SESSION['user_id']))
+                    { ?>
+                    <div>
+                        <form class="form1" action="/actions/ajouterPanier.php" method="post">
+                            <input type="text" name="id" value="<?= $vetement->v_id ?>" hidden>
+                            <input type="submit" value="Ajouter au panier" style="background-color: black; color: white; padding: 10px 30px; border: none; cursor: pointer">
+                        </form>
+                    </div>
+                    <?php }
+                    ?>
+                </td>
+                    <?php if($autorizeComment): ?>
+                <td>
+                    <form class="form2" action="/actions/commenter.php" method="post">
+                        <input type="text" name="produit" value="<?= $vetement->nom ?>" hidden>
+                        <input type="text" name="id" value="<?= $vetement->v_id ?>" hidden>
+                        <select name="note" required>
+                            <option value="">Choisissez une note</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <label for="message">Commenter : </label>
+                        <textarea name="message" cols="30" rows="10" required></textarea>
+                        <input type="submit" value="Envoyer le commentaire" style="background-color: black; color: white; padding: 10px 30px; border: none; margin-bottom: 50px; cursor: pointer">
+                    </form>
+                </td>
+                    <?php endif; ?>
                 <?php 
                     $TableauCommentaire = $BDD->select("SELECT * FROM commentaire WHERE v_id = ?", [$vetement->v_id], "Commentaire");
                     foreach($TableauCommentaire as $commentaire){
@@ -104,6 +112,51 @@ ob_start();?>
     <?php else: ?>
         <p>Poduit Inconnu</p>
     <?php endif; ?>
-</div>
+</main>
+
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+
+    main {
+        background-color: white;
+        color: black;
+    }
+
+    table {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .all-form {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .all-info {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form1 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .form2 {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        
+    }
+
+    .info1, .info2, .info3, .info4, .info5 {
+        
+    }
+</style>
 <?php
 $page_content = ob_get_clean();
