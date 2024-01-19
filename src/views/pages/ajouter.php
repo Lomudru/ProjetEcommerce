@@ -14,26 +14,39 @@ if(!isset($_SESSION['user_id']))
 }
 
 ob_start();?>
-<div>
-    <form action="/actions/ajouter.php" method="post" style="flex-direction: column;">
+<divclass="page-container">
+    <form class="custom-form" action="/actions/ajouter.php" method="post" style="flex-direction: column;">
         <label for="taille">Taille : </label>
-        <input type="text" name="taille">
-        <label for="couleur">Couleur : </label>
-        <input type="text" name="couleur">
-        <label for="matiere">Matière : </label>
-        <input type="text" name="matiere">
-        <label for="prix">Prix : </label>
-        <input type="text" name="prix">
-        <label for="sexe">Sexe : </label>
-        <input type="text" name="sexe">
-        <label for="categorie_id">ID Categorie : </label>
-        <input type="text" name="categorie_id">
-        <label for="stock">Stock : </label>
-        <input type="text" name="stock">
-        <label for="nom">Nom : </label>
-        <input type="text" name="nom">
-        <input type="submit" value="Ajouter">
+        <input class="form-input" type="text" name="taille">
+        <label class="form-input" for="couleur">Couleur : </label>
+        <input class="form-input" type="text" name="couleur">
+        <label class="form-input" for="matiere">Matière : </label>
+        <input class="form-input" type="text" name="matiere">
+        <label class="form-input" for="prix">Prix : </label>
+        <input class="form-input" type="text" name="prix">
+        <label class="form-input" for="sexe">Sexe : </label>
+        <input class="form-input" type="text" name="sexe">
+        <label class="form-input" for="categorie_id">ID Categorie : </label>
+        <input class="form-input" type="text" name="categorie_id">
+        <label class="form-input" for="stock">Stock : </label>
+        <input class="form-input" type="text" name="stock">
+        <label class="form-input" for="nom">Nom : </label>
+        <input class="form-input" type="text" name="nom">
+        <input class="submit-button" type="submit" value="Ajouter">
     </form>
 </div>
+<style>
+    *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: black;
+}
+
+</style>
 <?php
 $page_content = ob_get_clean();

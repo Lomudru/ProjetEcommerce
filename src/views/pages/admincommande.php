@@ -29,10 +29,10 @@ else{
 
 
 ob_start();?>
-<div>
+<div class="page-container">
     Admincommande
-    <form action="/?p=admincommande" method="post">
-        <select name="tri" onchange="this.form.submit()">
+    <form class="form-container" action="/?p=admincommande" method="post">
+        <select class="select-container" name="tri" onchange="this.form.submit()">
             <option value="">trier par statut</option>
             <option value="ALL">tout</option>
             <option value="NEW">nouveau</option>
@@ -42,8 +42,8 @@ ob_start();?>
             <option value="RETURN_USER">retour</option>
         </select>
     </form>
-    <a href="/?p=admincommande&order=true">trier par date</a> 
-    <table>
+    <a class="link-container" href="/?p=admincommande&order=true">trier par date</a> 
+    <table class="custom-table">
         <tr>
             <td>adresse</td>
             <td>commande_content</td>
@@ -77,5 +77,48 @@ ob_start();?>
         <?php endforeach; ?>
     </table>
 </div>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: black;
+}
+
+.page-container {
+    max-width: 800px; 
+    margin: 90px auto;
+}
+
+.section-header {
+    margin-bottom: 10px;
+}
+
+.form-container,
+.table-container {
+    margin-bottom: 20px;
+}
+
+.select-container,
+.link-container {
+    margin-right: 10px;
+    border: red;
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.custom-table, .custom-table th, .custom-table td {
+    border: 1px solid gray;
+    text-align: center;
+    padding: 8px;
+}
+</style>
 <?php
 $page_content = ob_get_clean();

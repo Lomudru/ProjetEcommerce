@@ -16,8 +16,8 @@ if(!isset($_SESSION['user_id']))
 $TableauVetements = $BDD->selectAll("SELECT * FROM vetements", "Vetement");
 
 ob_start();?>
-<div>
-    <table>
+<div class="tableau-container">
+    <table class="tab_admin">
         <tr>
             <td>Nom</td>
             <td>taille</td>
@@ -51,7 +51,49 @@ ob_start();?>
             </tr>
         <?php endforeach; ?>
     </table>
-    <a href="/?p=ajouter">Ajouter Un article</a>
+    <div class="bouton_ajout"><a href="/?p=ajouter">Ajouter un article</a></div>
 </div>
+<style>
+*{
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+  
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: black;
+}
+
+.tableau-container {
+    max-width: 800px; 
+    margin: 165px auto;
+}
+
+.tab_admin {
+    width: 100%;
+    border-collapse: collapse; 
+    background-color: black;
+    height: 16rem;
+    border-radius: 3px;
+
+}
+
+.tab_admin, .tab_admin th, .tab_admin td {
+    border: 1px solid gray;
+    text-align: center; 
+    vertical-align: middle; 
+    padding: 8px;
+}
+.bouton_ajout{
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+.bouton_ajout a {
+    color: white;
+    font-size: 20px;
+}
+</style>
 <?php
 $page_content = ob_get_clean();
