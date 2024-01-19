@@ -25,9 +25,21 @@ ob_start();?>
         <label for="prix">Prix : </label>
         <input type="text" name="prix">
         <label for="sexe">Sexe : </label>
-        <input type="text" name="sexe">
+        <select name="sexe">
+            <option value="">Choisir un sexe</option>
+            <option value="HOMME">Homme</option>
+            <option value="FEMME">Femme</option>
+        </select>
         <label for="categorie_id">ID Categorie : </label>
-        <input type="text" name="categorie_id">
+        <select name="categorie_id">
+                <option value="">Rechercher une catégorie</option>
+                <?php 
+                    $categorie = $BDD->selectAll("SELECT categorie,categorie_id FROM categorie", "Categorie");
+                    foreach($categorie as $cate){ ?>
+                        <option value="<?= $cate->categorie_id ?>"><?= $cate->categorie ?></option>
+                    <?php } ?>
+                ?>
+        </select>
         <label for="stock">Stock : </label>
         <input type="text" name="stock">
         <label for="nom">Nom : </label>

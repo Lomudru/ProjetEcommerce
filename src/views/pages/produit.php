@@ -1,25 +1,32 @@
 <?php
 
 $title = 'produit';
-
+$existing = true;
 if (isset($_POST['produit'])) {
     $TableauVetements = $BDD->select("SELECT V.v_id, V.taille, V.couleur, V.matiere, V.prix, V.sexe, C.categorie, V.stock, V.nom
     FROM vetements as V
     LEFT JOIN categorie AS C
     ON V.categorie_id = C.categorie_id
-    WHERE nom LIKE :nom
+    WHERE nom LIKE :nom AND prix IS NOT NULL
     ORDER BY V.taille ASC,V.prix ASC,V.sexe ASC;",[':nom' => '%'.$_POST['produit'].'%'], "Vetement");
+    if(sizeof($TableauVetements) == 0){
+        $existing = false;
+    }
 }elseif(isset($_GET["produit"])){
     $TableauVetements = $BDD->select("SELECT V.v_id, V.taille, V.couleur, V.matiere, V.prix, V.sexe, C.categorie, V.stock, V.nom
     FROM vetements as V
     LEFT JOIN categorie AS C
     ON V.categorie_id = C.categorie_id
-    WHERE nom LIKE :nom
-    ORDER BY V.taille ASC,V.prix ASC,V.sexe ASC;",[':nom' => '%'.$_GET["produit"].'%'], "Vetement");
+    WHERE nom LIKE :nom AND prix IS NOT NULL
+    ORDER BY V.taille ASC,V.prix ASC,V.sexe ASC",[':nom' => '%'.$_GET["produit"].'%'], "Vetement");
+    if(sizeof($TableauVetements) == 0){
+        header("Location: /?p=home");
+    }
 }
 
 ob_start();?>
 <div>
+    <?php if($existing): ?>
     <table>
         <?php 
         if (isset($_POST['produit']) || isset($_GET["produit"])):
@@ -37,7 +44,7 @@ ob_start();?>
                 }
                 ?>
                 <tr>
-
+                    <td><img src="<?= "img/id_img/".$vetement->v_id."/image.png"?>"></td>
                     <td><?php echo $vetement->nom; ?></td>
 
                     <td><?php echo $vetement->taille; ?></td>
@@ -59,7 +66,7 @@ ob_start();?>
                        <?php }
                         ?>
                     </td>
-                    <?php if($autorizeComment): ?>
+                    <?php if(isset($_SESSION["user_id"]) && $autorizeComment): ?>
                         <td>
                             <form action="/actions/commenter.php" method="post">
                                 <input type="text" name="produit" value="<?= $vetement->nom ?>" hidden>
@@ -94,6 +101,9 @@ ob_start();?>
                     <?php } ?>
             <?php endforeach; endif; ?>
     </table>
+    <?php else: ?>
+        <p>Poduit Inconnu</p>
+    <?php endif; ?>
 </div>
 <?php
 $page_content = ob_get_clean();

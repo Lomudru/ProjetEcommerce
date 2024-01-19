@@ -7,7 +7,10 @@ if (isset($_POST['cate'])) {
     FROM categorie AS C
     LEFT JOIN vetements AS V
     ON C.categorie_id = V.categorie_id
-     WHERE `categorie` LIKE :nom;",[':nom' => '%'.$_POST['cate'].'%'], "Vetement");
+    WHERE `categorie` LIKE :nom AND prix IS NOT NULL",[':nom' => '%'.$_POST['cate'].'%'], "Vetement");
+    if(sizeof($TableauCategorie) == 0){
+        header("Location: /?p=home");
+    }
 }
 
 ob_start();?>
@@ -16,19 +19,9 @@ ob_start();?>
         <?php 
         if (isset($_POST['cate'])):
             foreach ($TableauCategorie as $vetement) : ?>
-
                 <tr>
-
-                <td><?= $vetement->nom; ?></td>
-
-                <td><?= $vetement->taille; ?></td>
-
-                <td><?= $vetement->couleur; ?></td>
-
-                <td><?= $vetement->matiere; ?></td>
-
-                <td><?= $vetement->prix; ?></td>
-
+                    <td><a href="/?p=produit&produit=<?= $vetement->nom ?>"><img src="<?= "img/id_img/".$vetement->v_id."/image.png" ?>"></a></td>
+                    <td><a href="/?p=produit&produit=<?= $vetement->nom ?>"><?= $vetement->nom ?></a></td>
                 </tr>
             <?php endforeach; endif; ?>
     </table>

@@ -12,10 +12,12 @@ if(isset($_POST["id"])){
         header("Location: /?p=home");
         die();
     }
-
-    $BDD->insert("INSERT INTO commentaire(user_id, v_id, commentaire_note, commentaire_message) VALUE(?,?,?,?)", [$_SESSION["user_id"], $_POST["id"], $_POST["note"], $_POST["message"]]);
-    header("Location: /?p=produit&produit=". $_POST["produit"]);
-    die();
+    $verif = $BDD->select("SELECT v_id FROM vetements WHERE v_id = ?", [$_POST["id"]], "Vetement");
+    if($verif != false){
+        $BDD->insert("INSERT INTO commentaire(user_id, v_id, commentaire_note, commentaire_message) VALUE(?,?,?,?)", [$_SESSION["user_id"], $_POST["id"], $_POST["note"], $_POST["message"]]);
+        header("Location: /?p=produit&produit=". $_POST["produit"]);
+        die();
+    }
 }
 
 header("Location: /?p=home");
