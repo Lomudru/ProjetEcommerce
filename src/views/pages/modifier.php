@@ -2,7 +2,7 @@
 
 $title = 'Modifier';
 
-if(isset($_SESSION['user_id']))
+if(!isset($_SESSION['user_id']))
 {
     $role = $BDD->getByIdUser('utilisateur',$_SESSION['user_id'],'User');
 

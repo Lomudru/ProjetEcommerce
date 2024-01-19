@@ -8,6 +8,7 @@ class Vetement {
     public $prix;
     public $sexe;
     public $categorie_id;
+    public $categorie;
     public $stock;
     public $nom;
     

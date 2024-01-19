@@ -2,7 +2,7 @@
 
 $title = 'Panier';
 
-if(isset($_SESSION['user_id']))
+if(!isset($_SESSION['user_id']))
 {
     header("Location: /?p=home");
     die();
