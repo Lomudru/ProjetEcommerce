@@ -19,8 +19,9 @@ if(isset($_POST["id"])){
 
 ob_start();?>
 <div>
-    <form action="/actions/modifier.php" method="post" style="flex-direction: column;">
+    <form action="/actions/modifier.php" method="post" enctype="multipart/form-data" style="flex-direction: column;">
         <?php foreach($vetements as $vetement): ?>
+            <input type="file" name="img">
             <input type="text" name="id" value="<?= $vetement->v_id ?>" hidden>
             <label for="taille">Taille : </label>
             <input type="text" name="taille" value="<?= $vetement->taille ?>">
@@ -31,9 +32,21 @@ ob_start();?>
             <label for="prix">Prix : </label>
             <input type="text" name="prix" value="<?= $vetement->prix ?>">
             <label for="sexe">Sexe : </label>
-            <input type="text" name="sexe" value="<?= $vetement->sexe ?>">
-            <label for="cate">ID Categorie : </label>
-            <input type="text" name="categorie_id" value="<?= $vetement->categorie_id ?>">
+            <select name="sexe">
+                <option value="">Choisir un sexe</option>
+                <option value="HOMME">Homme</option>
+                <option value="FEMME">Femme</option>
+            </select>
+            <label for="categorie_id">Categorie : </label>
+            <select name="categorie_id">
+                <option value="">Rechercher une catégorie</option>
+                <?php 
+                    $categorie = $BDD->selectAll("SELECT categorie,categorie_id FROM categorie", "Categorie");
+                    foreach($categorie as $cate){ ?>
+                        <option value="<?= $cate->categorie_id ?>"><?= $cate->categorie ?></option>
+                    <?php } ?>
+                ?>
+            </select>
             <label for="stock">Stock : </label>
             <input type="text" name="stock" value="<?= $vetement->stock ?>">
             <label for="nom">Nom : </label>

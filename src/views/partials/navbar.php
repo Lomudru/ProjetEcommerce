@@ -12,9 +12,9 @@ ob_start();?>
                     <div class="nav2">
                         <ul>
                             <li><a href="/?p=home">ACCUEIL</a></li>
-                            <li><a href="">HOMME</a></li>
-                            <li><a href="">FEMME</a></li>
-                            <li><a href="">À PROPOS</a></li>
+                            <li><a href="/?p=sexe&sexe=HOMME">HOMME</a></li>
+                            <li><a href="/?p=sexe&sexe=FEMME">FEMME</a></li>
+                            <li><a href="/?p=panier">PANIER</a></li>
                         </ul>
                     </div>
 

@@ -2,7 +2,7 @@
 
 $title = 'admin';
 
-if(!isset($_SESSION['user_id']))
+if(isset($_SESSION['user_id']))
 {
     $role = $BDD->getByIdUser('utilisateur',$_SESSION['user_id'],'User');
 
@@ -11,6 +11,9 @@ if(!isset($_SESSION['user_id']))
         header("Location: /?p=home");
         die();
     }
+}else{
+    header("Location: /?p=home");
+    die();
 }
 
 $TableauVetements = $BDD->selectAll("SELECT * FROM vetements", "Vetement");
@@ -23,8 +26,10 @@ ob_start();?>
             <td>taille</td>
             <td>Couleur</td>
             <td>Matiere</td>
+            <td>SEXE</td>
             <td>prix</td>
             <td>Stock</td>
+            <td>CATEGORIE</td>
         </tr>
         <?php foreach($TableauVetements as $vetement): ?>
             <tr>
@@ -37,9 +42,18 @@ ob_start();?>
 
                 <td><?= $vetement->matiere; ?></td>
 
+                <td><?= $vetement->sexe; ?></td>
+
                 <td><?= $vetement->prix; ?></td>
 
                 <td><?= $vetement->stock; ?></td>
+
+                <td>
+                    <?php 
+                        $categorie = $BDD->select("SELECT categorie FROM categorie WHERE categorie_id = ?", [$vetement->categorie_id],"Categorie");
+                        echo $categorie[0]->categorie;
+                    ?>
+                </td>
                 
                 <td>
                     <form action="/?p=modifier" method="post" style="padding-top: 0;">
