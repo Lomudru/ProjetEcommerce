@@ -2,7 +2,7 @@
 
 $title = 'admin';
 
-if(!isset($_SESSION['user_id']))
+if(isset($_SESSION['user_id']))
 {
     $role = $BDD->getByIdUser('utilisateur',$_SESSION['user_id'],'User');
 
@@ -11,6 +11,9 @@ if(!isset($_SESSION['user_id']))
         header("Location: /?p=home");
         die();
     }
+}else{
+    header("Location: /?p=home");
+    die();
 }
 
 $TableauVetements = $BDD->selectAll("SELECT * FROM vetements", "Vetement");
