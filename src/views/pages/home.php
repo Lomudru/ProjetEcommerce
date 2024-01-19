@@ -4,7 +4,7 @@ $title = 'home';
 
 if(isset($_GET["disconnect"]) && $_GET["disconnect"] == 'true')
 {
-    unset($_SESSION["user_id"]);
+    session_destroy();
 }
 
 ob_start();?>
