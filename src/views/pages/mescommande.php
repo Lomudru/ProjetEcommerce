@@ -24,7 +24,20 @@ ob_start();?>
 
                 <td><?= $commande->adresse; ?></td>
 
-                <td><?= $commande->commande_content; ?></td>
+                <td>
+                    <?php
+                    $content = "";
+                    $commande_content;
+                    $commander = $BDD->select("SELECT commande_content FROM commande WHERE user_id = ? AND commande_id = ?", [$_SESSION["user_id"], $commande->commande_id], "Commande");
+                    foreach($commander as $commande){
+                        foreach(json_decode($commande->commande_content) as $vetementCommander){
+                            $vetement = $BDD->select("SELECT nom FROM vetements WHERE v_id = ?", [$vetementCommander], "Vetement");
+                            $content .= $vetement[0]->nom .", ";
+                        }
+                    }
+                    echo $content;
+                    ?>
+                </td>
 
                 <td><?= $commande->statut; ?></td>
     
